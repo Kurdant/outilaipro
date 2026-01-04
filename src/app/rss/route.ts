@@ -6,7 +6,7 @@ import urlJoin from "url-join";
 import { wisp } from "../../lib/wisp";
 import { config } from "@/config";
 
-const baseUrl = config.baseUrl;
+const siteUrl = config.siteUrl;
 
 export async function GET() {
   const result = await wisp.getPosts({ limit: 20 });
@@ -15,16 +15,16 @@ export async function GET() {
     return {
       title: post.title,
       description: post.description || "",
-      url: urlJoin(baseUrl, `/blog/${post.slug}`),
+      url: urlJoin(siteUrl, `/blog/${post.slug}`),
       date: post.publishedAt || new Date(),
     };
   });
 
   const feed = new RSS({
-    title: config.blog.name,
-    description: config.blog.metadata.description,
-    site_url: baseUrl,
-    feed_url: urlJoin(baseUrl, "/rss"),
+    title: config.siteName,
+    description: config.defaultDescription,
+    site_url: siteUrl,
+    feed_url: urlJoin(siteUrl, "/rss"),
     pubDate: new Date(),
   });
   posts.forEach((post) => {

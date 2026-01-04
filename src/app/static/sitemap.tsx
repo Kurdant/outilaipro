@@ -6,7 +6,7 @@ const staticPaths = ["about"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = staticPaths.map((path) => ({
-    url: urlJoin(config.baseUrl, path),
+    url: urlJoin(config.siteUrl, path),
     lastModified: new Date(),
     priority: 0.9,
   }));

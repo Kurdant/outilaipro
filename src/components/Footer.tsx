@@ -15,7 +15,7 @@ export const Footer: FunctionComponent = () => {
         </div>
         <div className="text-xs text-muted-foreground hidden lg:block">
           <Link
-            href={`https://wisp.blog/?utm_source=next-js-template&utm_medium=web&utm_campaign=${config.baseUrl}`}
+            href={`https://wisp.blog/?utm_source=next-js-template&utm_medium=web&utm_campaign=${config.siteUrl}`}
           >
             Blog powered by wisp
           </Link>
@@ -31,7 +31,7 @@ export const Footer: FunctionComponent = () => {
       </div>
       <div className="text-xs text-muted-foreground lg:hidden">
         <Link
-          href={`https://wisp.blog/?utm_source=next-js-template&utm_medium=web&utm_campaign=${config.baseUrl}`}
+          href={`https://wisp.blog/?utm_source=next-js-template&utm_medium=web&utm_campaign=${config.siteUrl}`}
         >
           Blog powered by wisp
         </Link>

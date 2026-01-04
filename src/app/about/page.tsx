@@ -1,50 +1,70 @@
+// src/app/about/page.tsx
+import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { config } from "@/config";
 import { signOgImageUrl } from "@/lib/og-image";
 import Markdown from "react-markdown";
 
-const content = `# À propos de moi
+const content = `# À propos
 
-![Samantha](https://imagedelivery.net/lLmNeOP7HXG0OqaG97wimw/clvlugru90000o4g8ahxp069s/db7abbe3-aa5c-433e-a16d-cbf137d1c9e5.png/public)
+Bienvenue sur **OutilAIPro**, ta source incontournable pour les dernières actualités et analyses sur l’intelligence artificielle, la technologie, le développement, Linux, le software et le hardware.
 
-Hey there! I'm Samantha, a 28-year-old former corporate warrior who decided to ditch the 9-to-5 grind and embark on an adventure of a lifetime. After years of hustling in a high-pressure job, I realized that life is too short to be stuck in an office, staring at spreadsheets all day.
+Notre mission est de te tenir informé des avancées rapides dans le domaine de l’IA et de la tech, tout en fournissant des ressources utiles pour les développeurs et les passionnés de technologie.
 
-So I took a leap of faith, quit my cushy job in Singapore, and decided to see the world on my own terms. No more stuffy meetings or rigid schedules – just me, my backpack, and an open road ahead.
+Que tu sois un professionnel du secteur, un étudiant ou simplement curieux, OutilAIPro t’offre des articles approfondis, des tutoriels pratiques et des critiques honnêtes pour t’aider à naviguer dans le monde complexe de la technologie moderne.
 
-![Samantha](https://imagedelivery.net/lLmNeOP7HXG0OqaG97wimw/clvlugru90000o4g8ahxp069s/6b080e65-2329-4a36-ad5c-0a6af8d9aeb1.png/public)
+Merci de nous rejoindre dans cette aventure technologique !
 
-This blog is where I'll be documenting my travels, sharing my experiences, and hopefully inspiring others to follow their wanderlust. From trekking through remote villages to savoring local cuisines, I'm on a mission to immerse myself in different cultures and create memories that will last a lifetime.
+L’équipe OutilAIPro
+`;
 
-But this journey isn't just about checking off destinations from a bucket list. It's about self-discovery, personal growth, and finding the courage to live life on my own terms. I'll be honest and raw, sharing the highs and lows, the moments of pure bliss and the inevitable challenges that come with solo travel.
+export async function generateMetadata(): Promise<Metadata> {
+  const title = `À propos | ${config.siteName}`;
+  const description =
+    "Découvre OutilAIPro : actualités IA, tech, code, Linux, software et hardware.";
 
-So join me on this adventure, and let's explore the world together! Who knows, maybe my stories will inspire you to take that leap of faith and pursue your own dreams, whatever they may be.
+  const canonical = `${config.siteUrl}/about`;
 
-Let's go on an adventure!
-
-Love,
-
-Samantha`;
-
-export async function generateMetadata() {
   return {
-    title: "About Me",
-    description: "Learn more about Samantha and her travel adventures",
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
     openGraph: {
-      title: "About Me",
-      description: "Learn more about Samantha and her travel adventures",
+      type: "website",
+      title,
+      description,
+      url: canonical,
+      siteName: config.siteName,
+      images: [
+        {
+          url: signOgImageUrl({
+            title: config.siteName,
+            label: "À propos",
+            brand: config.siteName,
+          }),
+          // (optionnel) width/height si tu veux
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
       images: [
         signOgImageUrl({
-          title: "Samantha",
-          label: "About Me",
-          brand: config.blog.name,
+          title: config.siteName,
+          label: "À propos",
+          brand: config.siteName,
         }),
       ],
     },
   };
 }
 
-const Page = async () => {
+export default async function Page() {
   return (
     <div className="container mx-auto px-5">
       <Header />
@@ -54,6 +74,4 @@ const Page = async () => {
       <Footer />
     </div>
   );
-};
-
-export default Page;
+}

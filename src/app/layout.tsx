@@ -1,52 +1,47 @@
-import { config } from "@/config";
-import { signOgImageUrl } from "@/lib/og-image";
-import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Providers } from "./providers";
-
-const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
+import { config } from "@/config"; // ou "@/lib/config" selon ton chemin
+import { signOgImageUrl } from "@/lib/og-image";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(config.siteUrl),
+
   title: {
-    absolute: config.blog.metadata.title.absolute,
-    default: config.blog.metadata.title.default,
-    template: config.blog.metadata.title.template,
+    default: config.defaultTitle,
+    template: `%s | ${config.siteName}`,
   },
-  description: config.blog.metadata.description,
+  description: config.defaultDescription,
+
+  alternates: {
+    canonical: config.siteUrl,
+  },
+
   openGraph: {
-    title: config.blog.metadata.title.default,
-    description: config.blog.metadata.description,
+    type: "website",
+    siteName: config.siteName,
+    title: config.defaultTitle,
+    description: config.defaultDescription,
+    url: config.siteUrl,
+    images: [
+      {
+        url: signOgImageUrl({
+          title: config.siteName,
+          label: "OutilAIPro",
+          brand: config.siteName,
+        }),
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: config.defaultTitle,
+    description: config.defaultDescription,
     images: [
       signOgImageUrl({
-        title: config.blog.name,
+        title: config.siteName,
+        label: "OutilAIPro",
+        brand: config.siteName,
       }),
     ],
   },
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7575791394562069"
-     crossOrigin="anonymous"></script>
-      </head>
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-6xl m-auto",
-          fontSans.variable
-        )}
-      >
-        <Providers>
-          <main>{children}</main>
-        </Providers>
-      </body>
-    </html>
-  );
-}

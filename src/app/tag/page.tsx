@@ -1,21 +1,45 @@
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import type { Metadata } from "next";
 import { config } from "@/config";
 import { signOgImageUrl } from "@/lib/og-image";
-import { wisp } from "@/lib/wisp";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 import Link from "next/link";
+import { wisp } from "@/lib/wisp";  
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
+  const title = `Tags | ${config.siteName}`;
+  const description = "Catégories d’articles : IA, tech, code, Linux, software, hardware.";
+  const canonical = `${config.siteUrl}/tag`;
+
   return {
-    title: "Tags",
-    description: "Different blog post categories",
+    title,
+    description,
+    alternates: { canonical },
     openGraph: {
-      title: "Tags",
-      description: "Different blog post categories",
+      type: "website",
+      siteName: config.siteName,
+      title,
+      description,
+      url: canonical,
+      images: [
+        {
+          url: signOgImageUrl({
+            title: "Catégories",
+            label: "Tags",
+            brand: config.siteName,
+          }),
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
       images: [
         signOgImageUrl({
-          title: "Blog Post Categories",
-          brand: config.blog.name,
+          title: "Catégories",
+          label: "Tags",
+          brand: config.siteName,
         }),
       ],
     },

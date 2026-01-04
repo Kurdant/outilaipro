@@ -1,68 +1,99 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import type { BlogPosting, WithContext } from "schema-dts";
+
 import { BlogPostContent } from "@/components/BlogPostContent";
 import { CommentSection } from "@/components/CommentSection";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { RelatedPosts } from "@/components/RelatedPosts";
+
 import { config } from "@/config";
 import { signOgImageUrl } from "@/lib/og-image";
 import { wisp } from "@/lib/wisp";
-import { notFound } from "next/navigation";
-import type { BlogPosting, WithContext } from "schema-dts";
 
-export async function generateMetadata(props: { params: Promise<Params> }) {
-  const params = await props.params;
-
-  const { slug } = params;
-
-  const result = await wisp.getPost(slug);
-  if (!result || !result.post) {
-    return {
-      title: "Blog post not found",
-    };
-  }
-
-  const { title, description, image } = result.post;
-  const generatedOgImage = signOgImageUrl({ title, brand: config.blog.name });
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      images: image ? [generatedOgImage, image] : [generatedOgImage],
-    },
-  };
-}
 interface Params {
   slug: string;
 }
 
-const Page = async (props: { params: Promise<Params> }) => {
-  const params = await props.params;
-
-  const { slug } = params;
+export async function generateMetadata(
+  props: { params: Promise<Params> }
+): Promise<Metadata> {
+  const { slug } = await props.params;
 
   const result = await wisp.getPost(slug);
-  const { posts } = await wisp.getRelatedPosts({ slug, limit: 3 });
-
-  if (!result || !result.post) {
-    return notFound();
+  if (!result?.post) {
+    return { title: "Article introuvable" };
   }
 
-  const { title, publishedAt, updatedAt, image, author } = result.post;
+  const { title, image, publishedAt, updatedAt, author } = result.post;
+
+  // description est string | null chez toi, donc on force un string
+  const description =
+    result.post.description ?? `Actualités IA et tech sur ${config.siteName}.`;
+
+  const canonical = `${config.siteUrl}/blog/${slug}`;
+  const generatedOg = signOgImageUrl({ title, brand: config.siteName });
+
+  const ogImages = [
+    { url: generatedOg },
+    ...(image ? [{ url: image }] : []),
+  ];
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+
+    openGraph: {
+      type: "article",
+      url: canonical,
+      siteName: config.siteName,
+      title,
+      description,
+      images: ogImages,
+      publishedTime: publishedAt ? new Date(publishedAt).toISOString() : undefined,
+      modifiedTime: updatedAt ? new Date(updatedAt).toISOString() : undefined,
+      authors: author?.name ? [author.name] : undefined,
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ogImages.map((i) => i.url),
+    },
+  };
+}
+
+export default async function Page(props: { params: Promise<Params> }) {
+  const { slug } = await props.params;
+
+  const result = await wisp.getPost(slug);
+  if (!result?.post) return notFound();
+
+  const { posts } = await wisp.getRelatedPosts({ slug, limit: 3 });
+
+  const { title, image, publishedAt, updatedAt, author } = result.post;
+
+  const description =
+    result.post.description ?? `Actualités IA et tech sur ${config.siteName}.`;
+
+  const canonical = `${config.siteUrl}/blog/${slug}`;
 
   const jsonLd: WithContext<BlogPosting> = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    mainEntityOfPage: canonical,
     headline: title,
-    image: image ? image : undefined,
-    datePublished: publishedAt ? publishedAt.toString() : undefined,
-    dateModified: updatedAt.toString(),
+    description,
+    image: image ?? undefined,
+    datePublished: publishedAt ? new Date(publishedAt).toISOString() : undefined,
+    dateModified: updatedAt ? new Date(updatedAt).toISOString() : undefined,
     author: {
       "@type": "Person",
-      name: author.name ?? undefined,
-      image: author.image ?? undefined,
+      name: author?.name ?? undefined,
+      image: author?.image ?? undefined,
     },
   };
 
@@ -72,6 +103,7 @@ const Page = async (props: { params: Promise<Params> }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
       <div className="container mx-auto px-5">
         <Header />
         <div className="max-w-prose mx-auto text-xl">
@@ -83,6 +115,4 @@ const Page = async (props: { params: Promise<Params> }) => {
       </div>
     </>
   );
-};
-
-export default Page;
+}

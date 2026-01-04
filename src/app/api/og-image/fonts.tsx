@@ -15,7 +15,7 @@ const loadFontsRaw = async (): Promise<FontMap> => {
   return {
     "inter-semibold": {
       name: "Inter",
-      data: await fetch(new URL("fonts/Inter-SemiBold.ttf", config.baseUrl)).then(
+      data: await fetch(new URL("fonts/Inter-SemiBold.ttf", config.siteUrl)).then(
         (res) => res.arrayBuffer()
       ),
       weight: 600,
@@ -23,7 +23,7 @@ const loadFontsRaw = async (): Promise<FontMap> => {
     },
     "inter-regular": {
       name: "Inter",
-      data: await fetch(new URL("fonts/Inter-Regular.ttf", config.baseUrl)).then(
+      data: await fetch(new URL("fonts/Inter-Regular.ttf", config.siteUrl)).then(
         (res) => res.arrayBuffer()
       ),
       weight: 400,
