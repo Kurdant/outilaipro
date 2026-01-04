@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { config } from "@/config"; // ou "@/lib/config" selon ton chemin
+import { config } from "@/config";
 import { signOgImageUrl } from "@/lib/og-image";
+
+import "./globals.css";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   metadataBase: new URL(config.siteUrl),
-
   title: {
     default: config.defaultTitle,
     template: `%s | ${config.siteName}`,
   },
   description: config.defaultDescription,
-
   alternates: {
     canonical: config.siteUrl,
   },
-
   openGraph: {
     type: "website",
     siteName: config.siteName,
@@ -31,7 +31,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
     title: config.defaultTitle,
@@ -45,3 +44,19 @@ export const metadata: Metadata = {
     ],
   },
 };
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="fr">
+      <body>
+        <Providers>
+          <main>{children}</main>
+        </Providers>
+      </body>
+    </html>
+  );
+}
