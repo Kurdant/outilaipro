@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { config } from "@/config";
 import { signOgImageUrl } from "@/lib/og-image";
+import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import { Providers } from "./providers";
@@ -56,6 +57,7 @@ export default function RootLayout({
         <Providers>
           <main>{children}</main>
         </Providers>
+        <Analytics /> 
       </body>
     </html>
   );

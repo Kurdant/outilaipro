@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { BlogPosting, WithContext } from "schema-dts";
 
+
 import { BlogPostContent } from "@/components/BlogPostContent";
 import { CommentSection } from "@/components/CommentSection";
 import { Footer } from "@/components/Footer";
