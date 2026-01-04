@@ -11,7 +11,7 @@ export const Footer: FunctionComponent = () => {
     <section className="mt-8 md:mt-16 mb-12">
       <div className="flex items-center justify-between">
         <div className="text-sm text-muted-foreground">
-          © {config.blog.copyright} {new Date().getFullYear()}
+          © {config.siteName} {new Date().getFullYear()}
         </div>
         <div className="text-xs text-muted-foreground hidden lg:block">
           <Link
