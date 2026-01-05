@@ -8,15 +8,17 @@ import Markdown from "react-markdown";
 
 const content = `# À propos
 
-Bienvenue sur **OutilAIPro**, ta source incontournable pour les dernières actualités et analyses sur l’intelligence artificielle, la technologie, le développement, Linux, le software et le hardware.
+# À propos de Outil IA Pro – Votre guide pour comprendre l’IA et les technologies modernes
 
-Notre mission est de te tenir informé des avancées rapides dans le domaine de l’IA et de la tech, tout en fournissant des ressources utiles pour les développeurs et les passionnés de technologie.
+Outil IA Pro est né d’une idée simple : rendre l’intelligence artificielle, le web et les nouvelles technologies accessibles à tous. Le site propose des articles clairs, pratiques et utiles, pensés pour les développeurs, les entreprises, les créateurs et toute personne curieuse du numérique.
 
-Que tu sois un professionnel du secteur, un étudiant ou simplement curieux, OutilAIPro t’offre des articles approfondis, des tutoriels pratiques et des critiques honnêtes pour t’aider à naviguer dans le monde complexe de la technologie moderne.
+Nous couvrons les sujets les plus récents et pertinents, des tendances IA aux innovations web, en passant par les bonnes pratiques et les outils qui peuvent réellement améliorer la productivité et faciliter le travail quotidien. Chaque article vise à expliquer les concepts de manière compréhensible, sans jargon inutile, tout en donnant des exemples concrets et des conseils exploitables.
 
-Merci de nous rejoindre dans cette aventure technologique !
+Notre objectif est de créer un espace où la technologie devient simple à comprendre, sans perdre sa profondeur. Nous croyons que l’IA et le web ne doivent pas rester réservés aux experts : chacun peut apprendre à les utiliser, à en tirer profit et à anticiper leurs impacts dans le monde professionnel et personnel.
 
-L’équipe OutilAIPro
+Outil IA Pro se concentre sur la qualité, la clarté et la pertinence de chaque contenu, pour que nos lecteurs repartent avec une vraie compréhension et des outils pratiques pour leur quotidien numérique.
+
+OutilAIPro
 `;
 
 export async function generateMetadata(): Promise<Metadata> {
