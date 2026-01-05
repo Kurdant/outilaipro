@@ -78,3 +78,108 @@
       @apply w-full;
     }
   }
+
+.sponsored-content{
+  /* look “page blanche” */
+  border: 0;
+  border-radius: 0;
+
+  max-width: 720px;
+  margin: 28px auto 0;
+  padding: 0 16px;
+
+  color: #ffffff;
+  text-align: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Titre (gros, souligné, centré) */
+.sponsored-title{
+  margin: 0 0 10px;
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.sponsored-title a{
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.sponsored-title a:hover{
+  opacity: .85;
+}
+
+/* Petite mention grise en capitales */
+.sponsored-kicker{
+  margin: 6px 0 18px;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #b7b7b7;
+  font-weight: 600;
+}
+
+/* Logo centré (comme l’image) */
+.sponsored-logo{
+  display: block;
+  width: min(230px, 70%);
+  height: auto;
+  margin: 0 auto 14px;
+}
+
+/* “GUARDIA” / nom de marque en très gros */
+.sponsored-brand{
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 900;
+  letter-spacing: .04em;
+  color: #111;
+}
+
+/* Sous-titre en gris clair */
+.sponsored-tagline{
+  margin: 6px 0 14px;
+  font-size: .9rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #c7bda3; /* beige/gris proche de l’exemple */
+  font-weight: 700;
+}
+
+/* Petit trait beige centré */
+.sponsored-divider{
+  display: inline-block;
+  width: 78px;
+  height: 8px;
+  background: #c7bda3;
+  border-radius: 2px;
+  margin: 6px 0 18px;
+}
+
+/* Texte descriptif en bas, aligné gauche comme un article */
+.sponsored-body{
+  text-align: left;
+  max-width: 640px;
+  margin: 0 auto;
+  color: #7a7a7a;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.sponsored-body p{
+  margin: 0 0 12px;
+}
+
+/* CTA style “lien orange” en fin */
+.sponsored-cta a{
+  color: #c7772a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sponsored-cta a:hover{
+  text-decoration: underline;
+}

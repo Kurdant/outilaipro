@@ -78,6 +78,43 @@ export const BlogPostContent = ({ post }: { post: GetPostResult["post"] }) => {
           )}
         </div>
       </div>
+      <hr />
+      <section className="sponsored-content" aria-label="Contenu partenaire">
+        <h2 className="sponsored-title">
+          <a href="https://kinsta.com/?kaid=XTLUVMYZCYQM" target="_blank" rel="sponsored noopener">
+            Hébergement WP infogéré premium
+          </a>
+        </h2>
+
+        <p className="sponsored-kicker">CONTENU PARTENAIRE</p>
+
+        {/* Option 1: si tu as une image/logo */}
+        <img
+          className="sponsored-logo"
+          src="/images/kinsta-logo.png"
+          alt=""
+          loading="lazy"
+        />
+        <p className="sponsored-brand">KINSTA</p>
+        <p className="sponsored-tagline">MANAGED WORDPRESS HOSTING</p>
+
+        <span className="sponsored-divider" aria-hidden="true"></span>
+
+        <div className="sponsored-body">
+          <p>
+            Pour héberger votre projet web ou votre serveur Node.js facilement, cet article contient un lien affilié vers
+            Kinsta, un hébergeur rapide, fiable et adapté aux développeurs et entreprises.
+          </p>
+          <p>
+            Cette recommandation est basée sur la performance et la simplicité d’utilisation, afin que vous puissiez vous concentrer sur le développement sans vous soucier de la configuration serveur.
+          </p>
+          <p className="sponsored-cta">
+            <a href="https://kinsta.com/?kaid=XTLUVMYZCYQM" target="_blank" rel="sponsored noopener">
+              Voir le site de l’hébergeur
+            </a>
+          </p>
+        </div>
+      </section>
     </div>
   );
 };
