@@ -6,7 +6,7 @@ import { config } from "@/config";
 import { signOgImageUrl } from "@/lib/og-image";
 import Markdown from "react-markdown";
 
-const content = `# À propos
+const content = `
 
 # À propos de Outil IA Pro – Votre guide pour comprendre l’IA et les technologies modernes
 
